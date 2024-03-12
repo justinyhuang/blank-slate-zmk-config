@@ -43,14 +43,6 @@
     };
 
     macros {
-      ZMK_MACRO(thumbs_up,
-		wait-ms = <1>;
-		tap-ms = <5>;
-                bindings = <&kp PLUS &kp COLON &kp PLUS &kp N1 &kp COLON &kp RET>;
-		)
-    };
-
-    macros {
         fbmm: fbmm {
             compatible = "zmk,behavior-macro";
 	    wait-ms = <1>;
