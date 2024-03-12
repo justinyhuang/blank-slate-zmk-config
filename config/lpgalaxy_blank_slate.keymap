@@ -18,6 +18,7 @@
 #define SYM_L 3
 #define MM_L 4 // MultiMedia and Misc
 #define FN_L 5 // Function
+#define MC_L 6 // Macro
 
 // Using layer taps on thumbs, having quick tap as well helps w/ repeating space/backspace
 &lt { quick_tap_ms = <200>; };
@@ -48,7 +49,25 @@
                 bindings = <&kp PLUS &kp COLON &kp PLUS &kp N1 &kp COLON &kp RET>;
 		)
     };
-    
+
+    macros {
+        fbmm: fbmm {
+            compatible = "zmk,behavior-macro";
+	    wait-ms = <1>;
+	    tap-ms = <5>;
+            bindings
+                = <&macro_tap &kp M &kp I &kp A>
+                , <&macro_tap &kp SPACE>
+                , <&macro_tap &kp I &kp N>
+                , <&macro_tap &kp SPACE>
+                , <&macro_tap &kp T &kp H &kp E>
+                , <&macro_tap &kp SPACE>
+                , <&macro_tap &kp H &kp O &kp U &kp S &kp E>
+                , <&macro_tap &kp RET>
+                ;
+        };
+    };
+
     tap_dances {
     	shifty: shift_caps_word {
 		compatible = "zmk,behavior-tap-dance";
@@ -79,7 +98,7 @@
  &lt MM_L ESC     &kp Q      &kp W      &kp F       &kp P               &kp G             &kp J            &kp L          &kp U       &kp Y      &kp SEMI      &kp BKSP
  &mt LCTRL TAB    &kp A      &kp R      &kp S       &kp T               &mt LCTRL D       &kp H            &kp N          &kp E       &kp I      &kp O         &kp RET
  &kp LSHFT        &kp Z      &kp X      &kp C       &kp V               &kp B             &kp K            &kp M          &kp COMMA   &kp DOT    &kp FSLH      &kp SQT
- &mt LCTRL GRAVE  &mo LALT   &kp LCMD   &mo SYM_L   &lt NUM_L GRAVE     &lt NAV_L ESC     &kp SPACE        &kp RSHFT      &trans      &mo FN_L   &kp RALT      &mt RCTRL MINUS
+ &mt LCTRL GRAVE  &mo LALT   &kp LCMD   &mo SYM_L   &lt NUM_L GRAVE     &lt NAV_L ESC     &kp SPACE        &kp RSHFT      &mo MC_L    &mo FN_L   &kp RALT      &mt RCTRL MINUS
             >;
         };
 
@@ -96,7 +115,7 @@
         num_layer {
             label = "Num";
             bindings = <
-&trans     &trans     &trans     &trans      &trans    &trans        &trans        &kp N7     &kp N8      &kp N9       &kp RS(X)  &kp BKSP
+&trans     &trans     &trans     &trans      &trans    &trans        &trans        &kp N7     &kp N8      &kp N9       &kp X      &kp BKSP
 &trans     &trans     &trans     &trans      &trans    &trans        &kp LBKT      &kp N4     &kp N5      &kp N6       &kp DOT    &trans
 &trans     &trans     &trans     &trans      &trans    &trans        &kp RBKT      &kp N1     &kp N2      &kp N3       &kp BSLH   &trans
 &trans     &trans     &trans     &trans      &trans    &trans        &kp EQUAL     &kp N0     &trans      &trans       &trans     &trans
@@ -128,6 +147,16 @@
             bindings = <
 &kp F1     &kp F2      &kp F3     &kp F4      &kp F5    &kp F6        &kp F7        &kp F8         &kp F9         &kp F10      &kp F11    &kp F12
 &kp F13    &kp F14     &kp F15    &kp F16     &kp F17   &kp F18       &kp F19       &kp F20        &kp F21        &kp F22      &kp F23    &kp F24
+&trans     &trans      &trans     &trans      &trans    &trans        &trans        &trans         &trans         &trans       &trans     &trans
+&trans     &trans      &trans     &trans      &trans    &trans        &trans        &trans         &trans         &trans       &trans     &trans
+            >;
+        };
+
+        mc_layer {
+            label = "Macro";
+            bindings = <
+&trans     &trans      &trans     &trans      &trans    &trans        &trans        &trans         &trans         &trans       &trans     &fbmm
+&trans     &trans      &trans     &trans      &trans    &trans        &trans        &trans         &trans         &trans       &trans     &trans
 &trans     &trans      &trans     &trans      &trans    &trans        &trans        &trans         &trans         &trans       &trans     &trans
 &trans     &trans      &trans     &trans      &trans    &trans        &trans        &trans         &trans         &trans       &trans     &trans
             >;
